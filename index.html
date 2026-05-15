@@ -839,7 +839,7 @@ body{animation:pageIn .55s ease both}
   /* BIO */
   .bio-wrap{grid-template-columns:1fr;gap:36px}
   .photo-frame{order:-1}
-  .photo-frame img{height:280px;object-position:center 16%}
+  .photo-frame img{height:340px;object-position:center 24%}
   .photo-frame::before,.photo-frame::after{display:none}
   .bio-h{font-size:clamp(36px,9vw,56px);margin-bottom:18px}
   .bio-p{font-size:13.5px;line-height:1.75;margin-bottom:10px}
@@ -852,8 +852,9 @@ body{animation:pageIn .55s ease both}
   .tabs{margin:16px 0 24px}
   .tab{padding:10px 14px;font-size:8.5px;letter-spacing:4px}
   .ag{grid-template-columns:1fr 1fr;gap:5px}
-  .a1,.a2,.a3,.a4,.a5{grid-column:auto;height:210px}
-  .a6{height:200px}
+  .a1,.a2,.a3,.a4{grid-column:auto;height:210px}
+  .a5{grid-column:1/-1;height:190px}
+  .a6{height:190px}
   .eg{grid-template-columns:1fr 1fr;gap:6px}
 
   /* VIDEOS */
@@ -873,9 +874,10 @@ body{animation:pageIn .55s ease both}
   .bk-wrap .rv[style]{padding-right:0!important;border-right:none!important}
   .bform[style]{padding-left:0!important}
   .frow{grid-template-columns:1fr}
-  .bform-direct{display:none}           /* remove links redundantes abaixo do form */
-  .bk-dl{gap:0;margin-top:40px;padding-top:36px}
-  .bk-dl::before,.bk-dl::after{display:none} /* remove linhas decorativas */
+  .bform-direct{display:none}
+  .bform{display:none}                  /* formulário oculto no mobile */
+  .bk-dl{gap:0;margin-top:36px;padding-top:32px;justify-content:flex-start}
+  .bk-dl::before,.bk-dl::after{display:none}
 
   /* FOOTER — simplificado */
   .ft{grid-template-columns:1fr;gap:0;padding:40px 22px 28px}
