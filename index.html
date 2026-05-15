@@ -839,7 +839,7 @@ body{animation:pageIn .55s ease both}
   /* BIO */
   .bio-wrap{grid-template-columns:1fr;gap:36px}
   .photo-frame{order:-1}
-  .photo-frame img{height:340px;object-position:center 24%}
+  .photo-frame img{height:420px;object-position:center 32%}
   .photo-frame::before,.photo-frame::after{display:none}
   .bio-h{font-size:clamp(36px,9vw,56px);margin-bottom:18px}
   .bio-p{font-size:13.5px;line-height:1.75;margin-bottom:10px}
@@ -876,8 +876,12 @@ body{animation:pageIn .55s ease both}
   .frow{grid-template-columns:1fr}
   .bform-direct{display:none}
   .bform{display:none}                  /* formulário oculto no mobile */
-  .bk-dl{gap:0;margin-top:36px;padding-top:32px;justify-content:flex-start}
+  .bk-h{display:none}                   /* remove "RESERVAR LOWZZADA" */
+  #booking .lbl{display:none}           /* remove label "BOOKING" */
+  .bk-p{display:none}                   /* remove descrição do booking */
+  .bk-dl{gap:0;margin-top:32px;padding-top:28px;justify-content:flex-start}
   .bk-dl::before,.bk-dl::after{display:none}
+  .fd{display:none}                     /* remove tagline do footer */
 
   /* FOOTER — simplificado */
   .ft{grid-template-columns:1fr;gap:0;padding:40px 22px 28px}
@@ -972,12 +976,8 @@ body{animation:pageIn .55s ease both}
   <a href="#bio">Bio</a>
   <a href="#gallery">Galeria</a>
   <a href="#videos">Vídeos</a>
-  <a href="#booking">Booking</a>
-  <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer">SoundCloud</a>
   <a href="https://youtu.be/F0Le1khJZX8" target="_blank" rel="noopener noreferrer">YouTube</a>
-  <div class="drawer-btn">
-    <a href="#booking" class="btn-fill">Agendar</a>
-  </div>
+  <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer">SoundCloud</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
