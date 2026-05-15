@@ -824,94 +824,105 @@ body{animation:pageIn .55s ease both}
   .nav-links,.nav-right{display:none}
   .burger{display:flex}
 
-  /* HERO */
-  .hero-tag{font-size:7.5px;letter-spacing:4px;gap:10px}
-  .hero-tag::before,.hero-tag::after{width:18px}
-  #heroName{font-size:clamp(56px,18vw,108px);letter-spacing:clamp(2px,.8vw,8px)}
+  /* HERO — mais limpo no mobile */
+  .hero-tag{display:none}               /* remove eyebrow tag */
+  .hero-scroll{display:none}            /* remove scroll indicator */
   #heroName span{font-size:clamp(8px,2vw,12px);letter-spacing:clamp(4px,1.2vw,9px)}
-  .hero-cta{gap:8px;margin-top:30px}
-  .btn-fill,.btn-line{padding:12px 26px;font-size:9px;letter-spacing:3px}
+  .hero-cta{gap:10px;margin-top:28px}
+  .btn-fill,.btn-line{padding:13px 28px;font-size:9px;letter-spacing:3px}
   .mute-toggle{bottom:22px;right:22px;width:38px;height:38px}
   .mute-toggle svg{width:16px;height:16px}
 
-  /* SW */
-  .sw{padding:72px 24px}
+  /* SW — menos espaço vertical */
+  .sw{padding:56px 22px}
 
   /* BIO */
-  .bio-wrap{grid-template-columns:1fr;gap:40px}
+  .bio-wrap{grid-template-columns:1fr;gap:36px}
   .photo-frame{order:-1}
-  .photo-frame img{height:310px;object-position:center 16%}
+  .photo-frame img{height:280px;object-position:center 16%}
   .photo-frame::before,.photo-frame::after{display:none}
+  .bio-h{font-size:clamp(36px,9vw,56px);margin-bottom:18px}
+  .bio-p{font-size:13.5px;line-height:1.75;margin-bottom:10px}
+  .chips{display:none}                  /* remove chips — info redundante */
 
-  /* STATS */
-  .stats-row{grid-template-columns:1fr 1fr}
-  .st{padding:30px 14px;border-bottom:1px solid var(--bdr)}
-  .st:nth-child(even){border-right:none}
-  .st:nth-child(5){grid-column:1/-1;border-bottom:none}
-  .st-n{font-size:50px}
+  /* STATS — oculto no mobile (info já está no bio e footer) */
+  #stats{display:none}
 
   /* GALLERY */
-  .tabs{margin:20px 0 30px}
+  .tabs{margin:16px 0 24px}
   .tab{padding:10px 14px;font-size:8.5px;letter-spacing:4px}
   .ag{grid-template-columns:1fr 1fr;gap:5px}
-  .a1,.a2,.a3,.a4,.a5{grid-column:auto;height:220px}
-  .a6{height:230px}
-  .eg{grid-template-columns:1fr 1fr;gap:7px}
+  .a1,.a2,.a3,.a4,.a5{grid-column:auto;height:210px}
+  .a6{height:200px}
+  .eg{grid-template-columns:1fr 1fr;gap:6px}
 
-  /* VIDEOS — 2 col on tablet, stack on phone */
-  .vid-grid4{gap:8px;margin-top:30px}
-  .vc-title{font-size:20px}
-  .vc-info{padding:52px 16px 18px}
-  .vc-ring{width:60px;height:60px}
+  /* VIDEOS */
+  .vid-grid4{gap:7px;margin-top:28px}
+  .vc-title{font-size:19px}
+  .vc-info{padding:48px 14px 16px}
+  .vc-ring{width:58px;height:58px}
 
-  /* CONNECT */
-  .conn-wrap{flex-direction:column;gap:44px}
-  .dot-card{flex:none;width:100%;padding:26px 20px}
+  /* CONNECT — oculto no mobile (links já estão no footer) */
+  #connect{display:none}
 
   /* BOOKING */
-  .bk-wrap{grid-template-columns:1fr;gap:48px;position:static}
+  .bk-wrap{grid-template-columns:1fr;gap:40px;position:static}
   .bk-wrap::before{display:none}
   .bk-left{padding-right:0}
   .bk-right,.bform.bk-right{padding-left:0}
-  .bk-dl{gap:16px;margin-top:52px;padding-top:44px}
   .bk-wrap .rv[style]{padding-right:0!important;border-right:none!important}
   .bform[style]{padding-left:0!important}
-  .bk-dl{gap:16px;margin-top:52px;padding-top:44px}
   .frow{grid-template-columns:1fr}
+  .bform-direct{display:none}           /* remove links redundantes abaixo do form */
+  .bk-dl{gap:0;margin-top:40px;padding-top:36px}
+  .bk-dl::before,.bk-dl::after{display:none} /* remove linhas decorativas */
 
-  /* FOOTER */
-  .ft{grid-template-columns:1fr;gap:30px;padding:42px 22px 34px}
-  .fb{flex-direction:column;gap:12px;text-align:center;padding:17px 22px}
-  .fn2{flex-wrap:wrap;justify-content:center;gap:12px}
+  /* FOOTER — simplificado */
+  .ft{grid-template-columns:1fr;gap:0;padding:40px 22px 28px}
+  .ft > .fc:nth-child(2){display:none}  /* hide coluna Navegação */
+  .ft > .fc:nth-child(3){display:none}  /* hide coluna Música */
+  .ft > div:first-child{margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid var(--bdr)}
+  .ft > .fc:last-child{padding-top:0}
+  .fb{flex-direction:column;gap:10px;text-align:center;padding:15px 22px}
+  .fn2{flex-wrap:wrap;justify-content:center;gap:10px}
+  .fd{max-width:100%;font-size:12px}
 }
 
 @media(max-width:600px){
-  /* VIDEOS — single col on small phones */
-  .vid-grid4{grid-template-columns:1fr;margin-left:-24px;margin-right:-24px;gap:6px}
-  .vc-ring{width:56px;height:56px}
-  .vc-title{font-size:18px;letter-spacing:3px}
-  .vc-sub{font-size:7px;letter-spacing:4px}
+  /* HERO — só o botão principal */
+  .hero-cta{flex-direction:column;align-items:center;gap:10px;margin-top:24px}
+  .btn-fill{width:100%;max-width:260px;text-align:center}
+  .btn-line{display:none}               /* remove "Ouvir Mixes" — foco no booking */
+
+  /* VIDEOS — coluna única */
+  .vid-grid4{grid-template-columns:1fr;margin-left:-22px;margin-right:-22px;gap:5px}
+  .vc-ring{width:54px;height:54px}
+  .vc-title{font-size:17px;letter-spacing:2.5px}
+  .vc-sub{font-size:7px;letter-spacing:3px}
   .vc-num{font-size:10px}
 
-  /* BUTTONS — full width on tiny screens */
-  .hero-cta{flex-direction:column;align-items:center}
-  .btn-fill,.btn-line{width:100%;max-width:280px;text-align:center}
-
   /* BOOKING form */
-  .fg input,.fg select,.fg textarea{font-size:16px}/* prevent zoom on iOS */
+  .fg input,.fg select,.fg textarea{font-size:16px} /* prevent zoom iOS */
+  .fbtn{font-size:8.5px;letter-spacing:4px;padding:15px}
+
+  /* GALLERY */
+  .a1,.a2,.a3,.a4,.a5{height:185px}
 }
 
 @media(max-width:480px){
-  #heroName{font-size:clamp(50px,22vw,80px)}
-  .a1,.a2,.a3,.a4,.a5{height:175px}
-  .a6{height:190px}
+  #heroLogoImg{width:clamp(160px,72vw,300px)}
+  .a1,.a2,.a3,.a4,.a5{height:160px}
+  .a6{height:175px}
   .eg{gap:5px}
-  .sw{padding:60px 18px}
+  .sw{padding:44px 16px}
+  .bk-h{font-size:clamp(38px,10vw,60px)}
+  .lbl{font-size:7px;letter-spacing:5px}
 
-  /* Modal full-screen on tiny phones */
+  /* Modal full-screen */
   #vmodal{padding:0;justify-content:flex-end;gap:0}
   #mvid{width:100vw;max-height:55vh}
-  .mhead{width:100%;padding:14px 18px;background:rgba(6,6,8,.98);box-sizing:border-box}
+  .mhead{width:100%;padding:14px 16px;background:rgba(6,6,8,.98);box-sizing:border-box}
+  .mtitle{font-size:14px;letter-spacing:4px}
 }
 
 /* Landscape phones */
