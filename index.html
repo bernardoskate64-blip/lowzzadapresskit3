@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -29,8 +29,8 @@
   --bg2:  #0e0e11;
   --bg3:  #17171c;
   --fg:   #f4f4f8;
-  --mut:  rgba(244,244,248,.42);
-  --dim:  rgba(244,244,248,.2);
+  --mut:  rgba(244,244,248,.62);
+  --dim:  rgba(244,244,248,.38);
   --acc:  #c6c6d0;        /* silver */
   --accH: #e8e8f0;
   --accL: rgba(198,198,208,.09);
@@ -38,10 +38,11 @@
   --bdr:  rgba(255,255,255,.07);
   --bdr2: rgba(255,255,255,.13);
   --dot:  rgba(255,255,255,.045);
+  --scrollbar: rgba(198,198,210,.22);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden}
+body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
 ::-webkit-scrollbar{width:2px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--bg3)}
@@ -154,7 +155,7 @@ body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;font-wei
 .hero-veil {
   position:absolute;inset:0;z-index:1;
   background:
-    linear-gradient(to right,rgba(6,6,8,.6) 0%,rgba(6,6,8,.05) 50%,rgba(6,6,8,.35) 100%),
+    linear-gradient(to right,rgba(6,6,8,.42) 0%,rgba(6,6,8,.0) 50%,rgba(6,6,8,.22) 100%),
     linear-gradient(to bottom,
       rgba(6,6,8,.35) 0%,
       rgba(6,6,8,.02) 22%,
@@ -328,9 +329,9 @@ body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;font-wei
   object-position:center 18%;
   display:block;position:relative;z-index:1;
   /* Press-kit grade: slight lift + desaturate for editorial look */
-  filter:contrast(1.08) saturate(.62) brightness(.96) grayscale(.08);
-  transition:filter .6s;
-}.photo-frame:hover img{filter:contrast(1.1) saturate(.78) brightness(1.02) grayscale(0)}
+  filter:none;
+  transition:none;
+}
 
 /* ─────────────────────────────────────────────────────
    STATS
@@ -519,7 +520,7 @@ body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;font-wei
    CONNECT
 ───────────────────────────────────────────────────── */
 .conn-wrap{display:flex;align-items:center;gap:80px}
-.conn-left{flex:1}
+.conn-left{flex:1;display:flex;flex-direction:column}
 .conn-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,82px);line-height:.91;letter-spacing:3px;margin-bottom:20px}
 .conn-h em{color:var(--acc);font-style:normal}
 .conn-p{color:var(--mut);font-size:14px;line-height:1.85;max-width:340px}
@@ -824,111 +825,93 @@ body{animation:pageIn .55s ease both}
   .nav-links,.nav-right{display:none}
   .burger{display:flex}
 
-  /* HERO — mais limpo no mobile */
-  .hero-tag{display:none}               /* remove eyebrow tag */
-  .hero-scroll{display:none}            /* remove scroll indicator */
+  /* HERO */
+  .hero-tag{font-size:7.5px;letter-spacing:4px;gap:10px}
+  .hero-tag::before,.hero-tag::after{width:18px}
+  #heroName{font-size:clamp(56px,18vw,108px);letter-spacing:clamp(2px,.8vw,8px)}
   #heroName span{font-size:clamp(8px,2vw,12px);letter-spacing:clamp(4px,1.2vw,9px)}
-  .hero-cta{gap:10px;margin-top:28px}
-  .btn-fill,.btn-line{padding:13px 28px;font-size:9px;letter-spacing:3px}
+  .hero-cta{gap:8px;margin-top:30px}
+  .btn-fill,.btn-line{padding:12px 26px;font-size:9px;letter-spacing:3px}
   .mute-toggle{bottom:22px;right:22px;width:38px;height:38px}
   .mute-toggle svg{width:16px;height:16px}
 
-  /* SW — menos espaço vertical */
-  .sw{padding:56px 22px}
+  /* SW */
+  .sw{padding:72px 24px}
 
   /* BIO */
-  .bio-wrap{grid-template-columns:1fr;gap:36px}
+  .bio-wrap{grid-template-columns:1fr;gap:40px}
   .photo-frame{order:-1}
-  .photo-frame img{height:420px;object-position:center 32%}
+  .photo-frame img{height:420px;object-position:center 38% !important}
   .photo-frame::before,.photo-frame::after{display:none}
-  .bio-h{font-size:clamp(36px,9vw,56px);margin-bottom:18px}
-  .bio-p{font-size:13.5px;line-height:1.75;margin-bottom:10px}
-  .chips{display:none}                  /* remove chips — info redundante */
 
-  /* STATS — oculto no mobile (info já está no bio e footer) */
-  #stats{display:none}
+  /* STATS */
+  .stats-row{grid-template-columns:1fr 1fr}
+  .st{padding:30px 14px;border-bottom:1px solid var(--bdr)}
+  .st:nth-child(even){border-right:none}
+  .st:nth-child(5){grid-column:1/-1;border-bottom:none}
+  .st-n{font-size:50px}
 
   /* GALLERY */
-  .tabs{margin:16px 0 24px}
+  .tabs{margin:20px 0 30px}
   .tab{padding:10px 14px;font-size:8.5px;letter-spacing:4px}
   .ag{grid-template-columns:1fr 1fr;gap:5px}
-  .a1,.a2,.a3,.a4{grid-column:auto;height:210px}
-  .a5{grid-column:1/-1;height:190px}
-  .a6{height:190px}
-  .eg{grid-template-columns:1fr 1fr;gap:6px}
+  .a1,.a2,.a3,.a4,.a5{grid-column:auto;height:220px}
+  .a6{height:230px}
+  .eg{grid-template-columns:1fr 1fr;gap:7px}
 
-  /* VIDEOS */
-  .vid-grid4{gap:7px;margin-top:28px}
-  .vc-title{font-size:19px}
-  .vc-info{padding:48px 14px 16px}
-  .vc-ring{width:58px;height:58px}
+  /* VIDEOS — 2 col on tablet, stack on phone */
+  .vid-grid4{gap:8px;margin-top:30px}
+  .vc-title{font-size:20px}
+  .vc-info{padding:52px 16px 18px}
+  .vc-ring{width:60px;height:60px}
 
-  /* CONNECT — oculto no mobile (links já estão no footer) */
-  #connect{display:none}
+  /* CONNECT */
+  .conn-wrap{flex-direction:column;gap:44px}
+  .dot-card{flex:none;width:100%;padding:26px 20px}
 
   /* BOOKING */
-  .bk-wrap{grid-template-columns:1fr;gap:40px;position:static}
+  .bk-wrap{grid-template-columns:1fr;gap:48px;position:static}
   .bk-wrap::before{display:none}
   .bk-left{padding-right:0}
   .bk-right,.bform.bk-right{padding-left:0}
+  .bk-dl{gap:16px;margin-top:52px;padding-top:44px}
   .bk-wrap .rv[style]{padding-right:0!important;border-right:none!important}
   .bform[style]{padding-left:0!important}
   .frow{grid-template-columns:1fr}
-  .bform-direct{display:none}
-  .bform{display:none}                  /* formulário oculto no mobile */
-  .bk-h{display:none}                   /* remove "RESERVAR LOWZZADA" */
-  #booking .lbl{display:none}           /* remove label "BOOKING" */
-  .bk-p{display:none}                   /* remove descrição do booking */
-  .bk-dl{gap:0;margin-top:32px;padding-top:28px;justify-content:flex-start}
-  .bk-dl::before,.bk-dl::after{display:none}
-  .fd{display:none}                     /* remove tagline do footer */
 
-  /* FOOTER — simplificado */
-  .ft{grid-template-columns:1fr;gap:0;padding:40px 22px 28px}
-  .ft > .fc:nth-child(2){display:none}  /* hide coluna Navegação */
-  .ft > .fc:nth-child(3){display:none}  /* hide coluna Música */
-  .ft > div:first-child{margin-bottom:32px;padding-bottom:28px;border-bottom:1px solid var(--bdr)}
-  .ft > .fc:last-child{padding-top:0}
-  .fb{flex-direction:column;gap:10px;text-align:center;padding:15px 22px}
-  .fn2{flex-wrap:wrap;justify-content:center;gap:10px}
-  .fd{max-width:100%;font-size:12px}
+  /* FOOTER */
+  .ft{grid-template-columns:1fr;gap:30px;padding:42px 22px 34px}
+  .fb{flex-direction:column;gap:12px;text-align:center;padding:17px 22px}
+  .fn2{flex-wrap:wrap;justify-content:center;gap:12px}
 }
 
 @media(max-width:600px){
-  /* HERO — só o botão principal */
-  .hero-cta{flex-direction:column;align-items:center;gap:10px;margin-top:24px}
-  .btn-fill{width:100%;max-width:260px;text-align:center}
-  .btn-line{display:none}               /* remove "Ouvir Mixes" — foco no booking */
-
-  /* VIDEOS — coluna única */
-  .vid-grid4{grid-template-columns:1fr;margin-left:-22px;margin-right:-22px;gap:5px}
-  .vc-ring{width:54px;height:54px}
-  .vc-title{font-size:17px;letter-spacing:2.5px}
-  .vc-sub{font-size:7px;letter-spacing:3px}
+  /* VIDEOS — single col on small phones */
+  .vid-grid4{grid-template-columns:1fr;margin-left:-24px;margin-right:-24px;gap:6px}
+  .vc-ring{width:56px;height:56px}
+  .vc-title{font-size:18px;letter-spacing:3px}
+  .vc-sub{font-size:7px;letter-spacing:4px}
   .vc-num{font-size:10px}
 
-  /* BOOKING form */
-  .fg input,.fg select,.fg textarea{font-size:16px} /* prevent zoom iOS */
-  .fbtn{font-size:8.5px;letter-spacing:4px;padding:15px}
+  /* BUTTONS — full width on tiny screens */
+  .hero-cta{flex-direction:column;align-items:center}
+  .btn-fill,.btn-line{width:100%;max-width:280px;text-align:center}
 
-  /* GALLERY */
-  .a1,.a2,.a3,.a4,.a5{height:185px}
+  /* BOOKING form */
+  .fg input,.fg select,.fg textarea{font-size:16px}/* prevent zoom on iOS */
 }
 
 @media(max-width:480px){
-  #heroLogoImg{width:clamp(160px,72vw,300px)}
-  .a1,.a2,.a3,.a4,.a5{height:160px}
-  .a6{height:175px}
+  #heroName{font-size:clamp(50px,22vw,80px)}
+  .a1,.a2,.a3,.a4,.a5{height:175px}
+  .a6{height:190px}
   .eg{gap:5px}
-  .sw{padding:44px 16px}
-  .bk-h{font-size:clamp(38px,10vw,60px)}
-  .lbl{font-size:7px;letter-spacing:5px}
+  .sw{padding:60px 18px}
 
-  /* Modal full-screen */
+  /* Modal full-screen on tiny phones */
   #vmodal{padding:0;justify-content:flex-end;gap:0}
   #mvid{width:100vw;max-height:55vh}
-  .mhead{width:100%;padding:14px 16px;background:rgba(6,6,8,.98);box-sizing:border-box}
-  .mtitle{font-size:14px;letter-spacing:4px}
+  .mhead{width:100%;padding:14px 18px;background:rgba(6,6,8,.98);box-sizing:border-box}
 }
 
 /* Landscape phones */
@@ -951,7 +934,6 @@ body{animation:pageIn .55s ease both}
     <li><a href="#videos">Vídeos</a></li>
     <li><a href="#booking">Booking</a></li>
     <li><a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer">SoundCloud</a></li>
-    <li><a href="https://youtu.be/F0Le1khJZX8" target="_blank" rel="noopener noreferrer">YouTube</a></li>
   </ul>
 
   <div class="nav-right">
@@ -976,17 +958,16 @@ body{animation:pageIn .55s ease both}
   <a href="#bio">Bio</a>
   <a href="#gallery">Galeria</a>
   <a href="#videos">Vídeos</a>
-  <a href="https://youtu.be/F0Le1khJZX8" target="_blank" rel="noopener noreferrer">YouTube</a>
+  <a href="#booking">Booking</a>
   <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+  <a href="https://open.spotify.com/intl-pt/artist/15zGa5VqskvlDw63uocEcs?si=ccT12_4nSomCDeNO7-DCPw" target="_blank" rel="noopener noreferrer">Spotify</a>
 </div>
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
   <video autoplay muted loop playsinline preload="auto"
-         x-webkit-airplay="deny" disablePictureInPicture
-         style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0">
+         x-webkit-airplay="deny" disablePictureInPicture>
     <source src="videos/hero-bg.mp4" type="video/mp4">
-    <source src="v3.mp4" type="video/mp4">
   </video>
   <div class="hero-veil"></div>
 
@@ -1033,38 +1014,33 @@ body{animation:pageIn .55s ease both}
 <hr class="hr">
 
 <!-- ═══ BIO ═══ -->
-<section id="bio"><div class="sw">
-  <div class="bio-wrap">
-    <div class="rv">
+<section id="bio"><div class="sw bio-sw">
+
+  <!-- Coluna esquerda: heading + texto -->
+  <div class="bio-left">
+    <div class="bio-head rv">
       <div class="lbl">Biografia</div>
-      <h2 class="bio-h">O Som<br><em>Por Trás</em><br>do Movimento</h2>
-      <p class="bio-p">Com uma identidade sonora marcada pelo groove constante e pela energia contagiante do Tech House, LOWZZADA se consolida como um dos principais nomes da cena eletrônica carioca.</p>
-      <p class="bio-p">Com raízes profundas na Região dos Lagos, traduz a sofisticação e o estilo de vida praiano em sets que transitam entre House, Tech House e Indie Dance — transformando cada venue em um momento cultural.</p>
-      <div class="chips">
-        <span class="chip">Tech House</span>
-        <span class="chip">House</span>
-        <span class="chip">Indie Dance</span>
-        <span class="chip">Região dos Lagos</span>
-        <span class="chip">Rio de Janeiro</span>
-      </div>
+      <h2 class="bio-h" style="line-height:.96">
+        <span style="display:block;padding-left:0">O Som</span>
+        <span style="display:block;padding-left:1.1em"><em>Por Trás</em></span>
+        <span style="display:block;padding-left:2.4em">do</span>
+        <span style="display:block;padding-left:.6em">Movimento</span>
+      </h2>
     </div>
-    <!-- Red shirt photo -->
-    <div class="photo-frame rv d2">
-      <img src="87a2a854-9b07-43aa-8b6a-4747187b9b7f.jpg" alt="LOWZZADA DJ" loading="lazy" style="object-position:center 6%">
+    <div class="bio-text rv d2">
+      <p class="bio-p">Com uma identidade sonora marcada pelo groove constante e pela energia contagiante do Tech House, LOWZZADA se consolida como um dos principais nomes da cena eletrônica carioca.</p>
+      <p class="bio-p">Com raízes profundas na Região dos Lagos, traduz a sofisticação e o estilo de vida praiano em cada performance — conectando artista e pista.</p>
     </div>
   </div>
+
+  <!-- Coluna direita: foto -->
+  <div class="bio-photo rv d1">
+    <div class="photo-frame">
+      <img src="87a2a854-9b07-43aa-8b6a-4747187b9b7f.jpg" alt="LOWZZADA DJ" loading="lazy" style="object-position:center 28%">
+    </div>
+  </div>
+
 </div></section>
-
-<!-- ═══ STATS ═══ -->
-<div id="stats"><div class="stats-row">
-  <div class="st rv"><div class="st-n">15+</div><div class="st-l">Anos de Carreira</div></div>
-  <div class="st rv d1"><div class="st-n">RJ</div><div class="st-l">Região dos Lagos</div></div>
-  <div class="st rv d2"><div class="st-n">3</div><div class="st-l">Estilos Musicais</div></div>
-  <div class="st rv d3"><div class="st-n">∞</div><div class="st-l">Energia no Set</div></div>
-  <div class="st rv d4"><div class="st-n">BR</div><div class="st-l">Booking Nacional</div></div>
-</div></div>
-
-<hr class="hr">
 
 <!-- ═══ GALLERY ═══ -->
 <section id="gallery"><div class="sw" style="padding-bottom:0">
@@ -1082,8 +1058,8 @@ body{animation:pageIn .55s ease both}
     <div class="ag">
       <!-- Row 1: rostos alinhados matematicamente na mesma altura visual -->
       <div class="gi a1 rv"><img src="3f5da03f-5181-4fbd-8da3-5e6b7944102b.jpg" alt="LOWZZADA" loading="lazy" style="object-position:center 100%"></div>
-      <div class="gi a2 rv d1"><img src="IMG_0836-Editar.jpg" alt="LOWZZADA" loading="lazy" style="object-position:center 16%"></div>
-      <div class="gi a3 rv d2"><img src="IMG_0841-Editar.jpg" alt="LOWZZADA" loading="lazy" style="object-position:center 5%"></div>
+      <div class="gi a2 rv d1"><img src="foto%20substituir%201.jpg" alt="LOWZZADA" loading="lazy" style="object-position:center 92%"></div>
+      <div class="gi a3 rv d2"><img id="gi-a3-img" src="foto%20substituir%202.jpg" alt="LOWZZADA" loading="lazy"></div>
       <!-- Row 2: 2 paisagens — containers horizontais, fotos largas encaixam perfeitamente -->
       <div class="gi a4 rv"><img src="cf49a80e-3e86-4e3f-81f4-650b0642e4ca.jpg" alt="LOWZZADA Live" loading="lazy" style="object-position:center 38%"></div>
       <div class="gi a5 rv d2"><img src="662c5fd6-37b6-4e59-b146-4f9fe82e84c2.jpg" alt="Beach Club" loading="lazy" style="object-position:center 44%"></div>
@@ -1107,36 +1083,36 @@ body{animation:pageIn .55s ease both}
 
   <div class="vid-grid4">
 
-    <div class="vc rv" id="vc0" role="button" tabindex="0" aria-label="Assistir On Stage" data-fullsrc="WhatsApp Video 2026-04-30 at 11.05.47.mp4">
+    <div class="vc rv" id="vc0" role="button" tabindex="0" aria-label="Assistir On Stage" data-fullsrc="WhatsApp%20Video%202026-04-30%20at%2011.05.47.mp4">
       <span class="vc-num">01</span>
-      <video muted loop autoplay playsinline preload="metadata">
-        <source src="WhatsApp Video 2026-04-30 at 11.05.47.mp4" type="video/mp4">
+      <video muted loop autoplay playsinline preload="metadata" poster="87a2a854-9b07-43aa-8b6a-4747187b9b7f.jpg">
+        <source src="WhatsApp%20Video%202026-04-30%20at%2011.05.47.mp4" type="video/mp4">
       </video>
       <div class="vc-over"><div class="vc-ring"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--acc)"><polygon points="7,3 21,12 7,21"/></svg></div></div>
       <div class="vc-info"><span class="vc-title">On Stage</span><span class="vc-sub">Live Set · Assistir</span></div>
     </div>
 
-    <div class="vc rv d1" id="vc1" role="button" tabindex="0" aria-label="Assistir The Vibe" data-fullsrc="WhatsApp Video 2026-04-30 at 11.34.00.mp4">
+    <div class="vc rv d1" id="vc1" role="button" tabindex="0" aria-label="Assistir The Vibe" data-fullsrc="WhatsApp%20Video%202026-04-30%20at%2011.34.47.mp4">
       <span class="vc-num">02</span>
-      <video muted loop autoplay playsinline preload="metadata">
-        <source src="WhatsApp Video 2026-04-30 at 11.34.00.mp4" type="video/mp4">
+      <video muted loop autoplay playsinline preload="metadata" poster="662c5fd6-37b6-4e59-b146-4f9fe82e84c2.jpg">
+        <source src="WhatsApp%20Video%202026-04-30%20at%2011.34.47.mp4" type="video/mp4">
       </video>
       <div class="vc-over"><div class="vc-ring"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--acc)"><polygon points="7,3 21,12 7,21"/></svg></div></div>
       <div class="vc-info"><span class="vc-title">The Vibe</span><span class="vc-sub">Atmosphere · Assistir</span></div>
     </div>
 
-    <div class="vc rv d2" id="vc2" role="button" tabindex="0" aria-label="Assistir Crowd Energy" data-fullsrc="video2.mp4.mp4">
+    <div class="vc rv d2" id="vc2" role="button" tabindex="0" aria-label="Assistir The Stage" data-fullsrc="videos/hero-bg.mp4">
       <span class="vc-num">03</span>
-      <video muted loop autoplay playsinline preload="metadata">
-        <source src="video2.mp4.mp4" type="video/mp4">
+      <video muted loop autoplay playsinline preload="metadata" poster="87a2a854-9b07-43aa-8b6a-4747187b9b7f.jpg">
+        <source src="videos/hero-bg.mp4" type="video/mp4">
       </video>
       <div class="vc-over"><div class="vc-ring"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--acc)"><polygon points="7,3 21,12 7,21"/></svg></div></div>
-      <div class="vc-info"><span class="vc-title">Crowd Energy</span><span class="vc-sub">Live Moment · Assistir</span></div>
+      <div class="vc-info"><span class="vc-title">The Stage</span><span class="vc-sub">Open Air · Assistir</span></div>
     </div>
 
     <div class="vc rv d3" id="vc3" role="button" tabindex="0" aria-label="Assistir The Set" data-fullsrc="IMG_0420.mp4.mp4">
       <span class="vc-num">04</span>
-      <video muted loop autoplay playsinline preload="metadata">
+      <video muted loop autoplay playsinline preload="metadata" poster="89c3f3e6-35a5-43b8-9217-40a95599e74f.jpg" style="object-position:center 58%">
         <source src="IMG_0420.mp4.mp4" type="video/mp4">
       </video>
       <div class="vc-over"><div class="vc-ring"><svg width="20" height="20" viewBox="0 0 24 24" fill="var(--acc)"><polygon points="7,3 21,12 7,21"/></svg></div></div>
@@ -1145,12 +1121,6 @@ body{animation:pageIn .55s ease both}
 
   </div>
 
-  <div class="yt-cta rv">
-    <a href="https://youtu.be/F0Le1khJZX8" target="_blank" rel="noopener noreferrer" class="yt-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.5s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.8 2.2 12 2.2 12 2.2s-4.8 0-7.3.2c-.6.1-1.9.1-3 1.3C.8 4.5.5 6.5.5 6.5S.2 8.8.2 11v2c0 2.2.3 4.5.3 4.5s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 22 12 22 12 22s4.8 0 7.3-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.3.3-4.5v-2C23.8 8.8 23.5 6.5 23.5 6.5zM9.7 15.5V8l8 3.9-8 3.6z"/></svg>
-      Ver Mais no YouTube
-    </a>
-  </div>
 </div></section>
 
 <!-- Video modal -->
@@ -1171,38 +1141,42 @@ body{animation:pageIn .55s ease both}
 
 <!-- ═══ CONNECT ═══ -->
 <section id="connect"><div class="sw dot-bg">
-  <div class="conn-wrap">
+  <div class="conn-wrap conn-wrap2">
+
+    <!-- COL ESQUERDA: título + texto + stats + foto embaixo -->
     <div class="conn-left rv">
       <div class="lbl">Redes</div>
-      <h2 class="conn-h">Siga a<br><em>Jornada</em></h2>
-      <p class="conn-p">Acompanhe sets, eventos e novidades do LOWZZADA nas plataformas de música e redes sociais.</p>
+      <h2 class="conn-h">Siga a <em>Jornada</em></h2>
+      <p class="conn-p" style="max-width:100%">Acompanhe sets ao vivo, registros exclusivos de performances e toda a identidade sonora de LOWZZADA nas principais plataformas e redes sociais.</p>
+      <p class="conn-p" style="max-width:100%;margin-top:0">Cada apresentação entrega uma experiência única, conectando groove, atmosfera e energia de pista através de uma conexão marcante entre Tech House, House e Indie Dance com a essência do litoral carioca.</p>
+
+      <div class="conn-stats">
+        <div class="cs-row"><span class="cs-n">+150</span><span class="cs-l">Sets ao Vivo</span></div>
+        <div class="cs-row"><span class="cs-n">RJ</span><span class="cs-l">Base Criativa</span></div>
+        <div class="cs-row cs-last"><span class="cs-n">∞</span><span class="cs-l">Energia de Pista</span></div>
+      </div>
     </div>
-    <div class="dot-card rv d2">
-      <span class="dcr tl">◆</span><span class="dcr br">◆</span>
-      <div class="soc-row">
-        <a href="https://www.instagram.com/lowzzada_dj" target="_blank" rel="noopener noreferrer" class="soc-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".65" fill="currentColor" stroke="none"/></svg>
+
+    <!-- COL DIREITA: Polaroid + botões sociais -->
+    <div class="conn-right-col rv d2">
+      <div class="conn-polaroid conn-polaroid-bottom">
+        <div class="polaroid-frame">
+          <img src="87a2a854-9b07-43aa-8b6a-4747187b9b7f.jpg" alt="LOWZZADA" loading="lazy" class="polaroid-img">
+          <div class="polaroid-cap"><img src="LOWZZADA_NOVA (4).png" alt="LOWZZADA" style="height:32px;width:auto;display:block;margin:0 auto;filter:invert(1) brightness(0)"></div>
+        </div>
+      </div>
+      <div class="pol-soc-wrap">
+        <a href="https://www.instagram.com/lowzzada_dj" target="_blank" rel="noopener noreferrer" class="pol-soc">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
           Instagram
         </a>
-        <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer" class="soc-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.56 8.87V17h8.76c1.5-.09 2.68-1.35 2.68-2.87 0-1.58-1.27-2.87-2.84-2.87-.3 0-.6.05-.87.14C18.97 9.48 17.27 8 15.22 8c-.87 0-1.67.27-2.33.72-.69.47-1.15 1.15-1.33 2.15zm-3.69 2.97c-.15-.94-.72-1.74-1.53-2.18V17h3v-8.13c-.88.38-1.47 1.25-1.47 2.27zm-2.35-.71V17h.82V11.1zm-1.27.7V17h.64v-5.97zm-1.29-.25V17h.64v-4.61zm-1.26.55V17h.63v-4.61z"/></svg>
+        <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer" class="pol-soc">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M2 13.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5zm2-1a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 1 0v-3a.5.5 0 0 0-.5-.5zm2-.5a.5.5 0 0 0-.5.5v4a.5.5 0 0 0 1 0v-4a.5.5 0 0 0-.5-.5zm2-.5a.5.5 0 0 0-.5.5v5a.5.5 0 0 0 1 0v-5a.5.5 0 0 0-.5-.5zm2-1a.5.5 0 0 0-.5.5v6a.5.5 0 0 0 1 0v-6a.5.5 0 0 0-.5-.5zm4.5-.5c-.8 0-1.5.3-2.1.7V10c0-.3-.2-.5-.4-.5-.3 0-.5.2-.5.5v7.5c0 .3.2.5.5.5h5.5c1.4 0 2.5-1.1 2.5-2.5S21.4 13 20 13c-.2 0-.3 0-.5.1C19.2 11.3 17.7 10 16 10z"/></svg>
           SoundCloud
         </a>
-        <a href="https://open.spotify.com/intl-pt/artist/15zGa5VqskvlDw63uocEcs?si=ccT12_4nSomCDeNO7-DCPw" target="_blank" rel="noopener noreferrer" class="soc-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.623.623 0 01-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 01-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 01.207.857zm1.223-2.723a.78.78 0 01-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 01-.97-.519.781.781 0 01.52-.972c3.632-1.102 8.147-.568 11.23 1.328a.78.78 0 01.257 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 11-.543-1.794c3.532-1.072 9.404-.865 13.115 1.338a.937.937 0 01-.955 1.612z"/></svg>
-          Spotify
-        </a>
-        <a href="https://youtu.be/F0Le1khJZX8" target="_blank" rel="noopener noreferrer" class="soc-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.5s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.8 2.2 12 2.2 12 2.2s-4.8 0-7.3.2c-.6.1-1.9.1-3 1.3C.8 4.5.5 6.5.5 6.5S.2 8.8.2 11v2c0 2.2.3 4.5.3 4.5s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 22 12 22 12 22s4.8 0 7.3-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.3.3-4.5v-2C23.8 8.8 23.5 6.5 23.5 6.5zM9.7 15.5V8l8 3.9-8 3.6z"/></svg>
-          YouTube
-        </a>
       </div>
-      <div class="chr"></div>
-      <div class="crow"><span class="ck">Instagram</span><span class="cv">@lowzzada_dj</span></div>
-      <div class="crow"><span class="ck">Localização</span><span class="cv">Região dos Lagos · RJ</span></div>
-      <div class="crow" style="margin-bottom:24px"><span class="ck">Carreira</span><span class="cv">15+ Anos</span></div>
-      <a href="#booking" class="btn-fill" style="display:block;text-align:center">Agendar LOWZZADA</a>
     </div>
+
   </div>
 </div></section>
 
@@ -1210,58 +1184,44 @@ body{animation:pageIn .55s ease both}
 
 <!-- ═══ BOOKING ═══ -->
 <section id="booking"><div class="sw">
-  <div class="bk-wrap">
-    <div class="bk-left rv">
-      <div class="lbl">Booking</div>
-      <h2 class="bk-h">Reservar<br><em>LOWZZADA</em></h2>
-      <p class="bk-p">Para bookings de festivais, residências em clube, beach clubs e eventos privados — preencha o formulário ou entre em contato.</p>
-      <div class="cl">
-        <div class="clr"><span class="clk">Instagram</span><span class="clv">@lowzzada_dj</span></div>
-        <div class="clr"><span class="clk">Região</span><span class="clv">Região dos Lagos · RJ</span></div>
-        <div class="clr"><span class="clk">Estilos</span><span class="clv">Tech House · House · Indie Dance</span></div>
-        <div class="clr"><span class="clk">Carreira</span><span class="clv">15+ Anos de Experiência</span></div>
-        <div class="clr"><span class="clk">WhatsApp</span><span class="clv">+55 22 99959-5882</span></div>
-        <div class="clr"><span class="clk">Email</span><span class="clv">diogo_bz@hotmail.com</span></div>
-        <div class="clr"><span class="clk">SoundCloud</span><span class="clv">LOWZZADA</span></div>
-      </div>
-    </div>
-    <div class="bform bk-right rv d2">
-      <div class="frow">
+  <div class="rv">
+    <div class="lbl">Booking</div>
+    <h2 class="bk-h" style="text-align:center">Reservar <em>LOWZZADA</em></h2>
+  </div>
+  <div class="bform rv d1" style="margin-top:40px">
+      <div class="bk-grid4">
         <div class="fg"><label>Nome <span style="color:var(--acc);font-size:10px">*</span></label><input type="text" placeholder="Seu nome completo" name="nome" id="f-nome" required></div>
         <div class="fg"><label>Email <span style="color:var(--acc);font-size:10px">*</span></label><input type="email" placeholder="seu@email.com" name="email" id="f-email" required></div>
-      </div>
-      <div class="frow">
         <div class="fg"><label>Tipo de Evento</label><select name="tipo" id="f-tipo"><option value="">Selecionar...</option><option>Festival</option><option>Clube / Residência</option><option>Beach Club</option><option>Evento Privado</option><option>Corporativo</option><option>Outro</option></select></div>
         <div class="fg"><label>Data Prevista</label><input type="date" name="data" id="f-data"></div>
-      </div>
-      <div class="frow">
         <div class="fg"><label>Cidade / Estado</label><input type="text" placeholder="Ex: Búzios, RJ" name="cidade" id="f-cidade"></div>
-        <div class="fg"><label>Público</label><input type="text" placeholder="Ex: 500 pessoas" name="publico" id="f-publico"></div>
+        <div class="fg"><label>Público Estimado</label><input type="text" placeholder="Ex: 500 pessoas" name="publico" id="f-publico"></div>
       </div>
-      <div class="fg"><label>Mensagem</label><textarea name="mensagem" id="f-mensagem" placeholder="Detalhes do evento, horário, cachê, infraestrutura..."></textarea></div>
+      <div class="fg" style="margin-top:14px"><label>Mensagem</label><textarea name="mensagem" id="f-mensagem" placeholder="Detalhes do evento, horário, cachê, infraestrutura..." style="min-height:120px"></textarea></div>
       <button class="fbtn" id="fbtn">Enviar Pedido de Booking</button>
 
-      <!-- Contato direto — preenche o espaço restante com conteúdo útil -->
+      <!-- Contato direto horizontal -->
       <div class="bform-direct">
         <div class="bform-sep"><span>ou contato direto</span></div>
-        <a href="https://wa.me/5522999595882?text=Ol%C3%A1%2C+gostaria+de+fazer+um+booking+do+LOWZZADA" target="_blank" rel="noopener" class="bform-clink">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.35A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.71 0-3.3-.46-4.67-1.26l-.33-.2-3.01.8.81-2.95-.22-.35A7.97 7.97 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
-          <div><span class="bfc-lbl">WhatsApp</span><span class="bfc-val">+55 22 99959-5882</span></div>
-          <svg class="bfc-arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="https://www.instagram.com/lowzzada_dj" target="_blank" rel="noopener" class="bform-clink">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".65" fill="currentColor" stroke="none"/></svg>
-          <div><span class="bfc-lbl">Instagram</span><span class="bfc-val">@lowzzada_dj</span></div>
-          <svg class="bfc-arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener" class="bform-clink">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.56 8.87V17h8.76c1.5-.09 2.68-1.35 2.68-2.87 0-1.58-1.27-2.87-2.84-2.87-.3 0-.6.05-.87.14C18.97 9.48 17.27 8 15.22 8c-.87 0-1.67.27-2.33.72-.69.47-1.15 1.15-1.33 2.15zm-3.69 2.97c-.15-.94-.72-1.74-1.53-2.18V17h3v-8.13c-.88.38-1.47 1.25-1.47 2.27zm-2.35-.71V17h.82V11.1zm-1.27.7V17h.64v-5.97zm-1.29-.25V17h.64v-4.61zm-1.26.55V17h.63v-4.61z"/></svg>
-          <div><span class="bfc-lbl">SoundCloud</span><span class="bfc-val">LOWZZADA</span></div>
-          <svg class="bfc-arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <p class="bform-note">Retorno em até 24h &nbsp;·&nbsp; Rider técnico disponível</p>
+        <div class="bform-direct-row">
+          <a href="https://wa.me/5522999595882?text=Ol%C3%A1%2C+gostaria+de+fazer+um+booking+do+LOWZZADA" target="_blank" rel="noopener" class="bform-clink">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.35A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.71 0-3.3-.46-4.67-1.26l-.33-.2-3.01.8.81-2.95-.22-.35A7.97 7.97 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+            <div><span class="bfc-lbl">WhatsApp</span><span class="bfc-val">+55 22 99959-5882</span></div>
+            <svg class="bfc-arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="https://www.instagram.com/lowzzada_dj" target="_blank" rel="noopener" class="bform-clink">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".65" fill="currentColor" stroke="none"/></svg>
+            <div><span class="bfc-lbl">Instagram</span><span class="bfc-val">@lowzzada_dj</span></div>
+            <svg class="bfc-arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener" class="bform-clink">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.56 8.87V17h8.76c1.5-.09 2.68-1.35 2.68-2.87 0-1.58-1.27-2.87-2.84-2.87-.3 0-.6.05-.87.14C18.97 9.48 17.27 8 15.22 8c-.87 0-1.67.27-2.33.72-.69.47-1.15 1.15-1.33 2.15zm-3.69 2.97c-.15-.94-.72-1.74-1.53-2.18V17h3v-8.13c-.88.38-1.47 1.25-1.47 2.27zm-2.35-.71V17h.82V11.1zm-1.27.7V17h.64v-5.97zm-1.29-.25V17h.64v-4.61zm-1.26.55V17h.63v-4.61z"/></svg>
+            <div><span class="bfc-lbl">SoundCloud</span><span class="bfc-val">LOWZZADA</span></div>
+            <svg class="bfc-arr" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <p class="bform-note" style="text-align:center;margin-top:16px">Retorno em até 24h &nbsp;·&nbsp; Rider técnico disponível</p>
       </div>
-    </div>
   </div>
 
   <!-- Download Press Kit — abaixo da seção inteira -->
@@ -1274,47 +1234,11 @@ body{animation:pageIn .55s ease both}
 </div></section>
 
 <!-- ═══ FOOTER ═══ -->
-<footer>
-  <div class="ft">
-    <div>
-      <div class="fn">LOWZZADA</div>
-      <p class="fd">O Pulso do Tech House no litoral do Rio de Janeiro. Tech House, House e Indie Dance em uma experiência cultural única.</p>
-      <div class="fs">
-        <a href="https://www.instagram.com/lowzzada_dj" target="_blank" rel="noopener noreferrer" class="fsi" aria-label="Instagram">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
-        </a>
-        <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer" class="fsi" aria-label="SoundCloud">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.56 8.87V17h8.76c1.5-.09 2.68-1.35 2.68-2.87 0-1.58-1.27-2.87-2.84-2.87-.3 0-.6.05-.87.14C18.97 9.48 17.27 8 15.22 8c-.87 0-1.67.27-2.33.72-.69.47-1.15 1.15-1.33 2.15zm-3.69 2.97c-.15-.94-.72-1.74-1.53-2.18V17h3v-8.13c-.88.38-1.47 1.25-1.47 2.27zm-2.35-.71V17h.82V11.1zm-1.27.7V17h.64v-5.97zm-1.29-.25V17h.64v-4.61zm-1.26.55V17h.63v-4.61z"/></svg>
-        </a>
-        <a href="https://youtu.be/F0Le1khJZX8" target="_blank" rel="noopener noreferrer" class="fsi" aria-label="YouTube">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.5s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.8 2.2 12 2.2 12 2.2s-4.8 0-7.3.2c-.6.1-1.9.1-3 1.3C.8 4.5.5 6.5.5 6.5S.2 8.8.2 11v2c0 2.2.3 4.5.3 4.5s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.2 22 12 22 12 22s4.8 0 7.3-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.3.3-4.5v-2C23.8 8.8 23.5 6.5 23.5 6.5zM9.7 15.5V8l8 3.9-8 3.6z"/></svg>
-        </a>
-      </div>
-    </div>
-    <div class="fc">
-      <div class="fch">Navegação</div>
-      <ul><li><a href="#bio">Biografia</a></li><li><a href="#gallery">Galeria</a></li><li><a href="#videos">Vídeos</a></li><li><a href="#booking">Booking</a></li></ul>
-    </div>
-    <div class="fc">
-      <div class="fch">Música</div>
-      <ul><li><a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer">SoundCloud</a></li><li><a href="https://youtu.be/F0Le1khJZX8" target="_blank" rel="noopener noreferrer">YouTube</a></li><li><a href="https://www.instagram.com/lowzzada_dj" target="_blank" rel="noopener noreferrer">Instagram</a></li></ul>
-    </div>
-    <div class="fc">
-      <div class="fch">Contato</div>
-      <p><strong>Instagram</strong><br>@lowzzada_dj</p>
-      <p><strong>WhatsApp</strong><br>+55 22 99959-5882</p>
-      <p style="margin-top:14px"><a href="https://drive.google.com/drive/folders/1kSO4Qqdiqt89U-KQ-AyQ5PMzA8J87GUe" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:7px;font-size:8px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--acc);text-decoration:none;border:1px solid var(--bdr2);padding:9px 16px;transition:border-color .3s,color .3s;" onmouseover="this.style.borderColor='var(--accD)';this.style.color='var(--accH)'" onmouseout="this.style.borderColor='var(--bdr2)';this.style.color='var(--acc)'"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Press Kit</a></p>
-      <p><strong>Email</strong><br>diogo_bz@hotmail.com</p>
-      <p><strong>Localização</strong><br>Região dos Lagos · RJ</p>
-      <p><strong>Estilos</strong><br>Tech House · House · Indie Dance</p>
-    </div>
-  </div>
-  <div class="fb">
-    <p class="fc2">© 2026 LOWZZADA — Todos os direitos reservados</p>
-    <div class="fn2">
-      <a href="#bio">Bio</a><a href="#gallery">Galeria</a>
-      <a href="#videos">Vídeos</a><a href="#booking">Booking</a>
-    </div>
+<footer style="background:var(--bg2);border-top:1px solid var(--bdr)">
+  <div style="display:flex;align-items:center;justify-content:center;padding:72px 24px">
+    <a href="#hero" style="display:inline-flex;align-items:center;text-decoration:none;opacity:.55;transition:opacity .3s" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='.55'">
+      <img src="LOWZZADA_NOVA (4).png" alt="LOWZZADA" style="height:58px;width:auto;display:block;filter:invert(1)">
+    </a>
   </div>
 </footer>
 
@@ -1508,7 +1432,7 @@ const mclose = document.getElementById('mclose');
 const VMAP = {
   vc0: { title: 'On Stage' },
   vc1: { title: 'The Vibe' },
-  vc2: { title: 'Crowd Energy' },
+  vc2: { title: 'The Stage' },
   vc3: { title: 'The Set' }
 };
 
@@ -1662,6 +1586,537 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
     feedback(btn, true, "Email aberto! Confira seu cliente de email");
   });
+})();
+</script>
+
+<!-- Connect 3-col + Polaroid styles -->
+<style>
+/* 3-col layout — center vertical */
+.conn-wrap2{align-items:stretch;gap:72px}
+
+/* Stats compact */
+.conn-stats{margin-top:38px;width:100%;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+.cs-row{display:flex;align-items:center;gap:24px;padding:26px 0;border-top:1px solid var(--bdr);flex:1}
+.cs-last{border-bottom:1px solid var(--bdr)}
+.cs-n{font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--fg);line-height:1;min-width:0;flex-shrink:1}
+.cs-l{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--dim)}
+
+/* Polaroid */
+.conn-polaroid{display:flex;align-items:center}
+.conn-polaroid-bottom{margin-top:48px;justify-content:flex-start}
+.polaroid-frame{
+  background:#fff;
+  padding:13px 13px 22px;
+  transform:rotate(0deg);
+  box-shadow:0 12px 44px rgba(0,0,0,.65),0 3px 12px rgba(0,0,0,.35);
+  width:100%;
+  transition:transform .5s cubic-bezier(.25,.46,.45,.94),box-shadow .5s;
+}
+.conn-polaroid:hover .polaroid-frame{
+  transform:scale(1.03);
+  box-shadow:0 18px 56px rgba(0,0,0,.7),0 4px 16px rgba(0,0,0,.4);
+}
+.polaroid-img{
+  width:100%;aspect-ratio:1/1;
+  object-fit:cover;object-position:center 38%;
+  display:block;
+  filter:contrast(1.05) saturate(.8) brightness(.9);
+}
+.polaroid-cap{
+  color:#111;text-align:center;
+  padding-top:11px;line-height:1;
+}
+.pol-soc-wrap{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  flex:1;
+}
+.pol-soc{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:6px;
+  font-family:'Jost',sans-serif;font-size:8px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--mut);text-decoration:none;
+  border:1px solid var(--bdr2);
+  transition:border-color .3s,color .3s,background .3s;
+}
+.pol-soc:hover{border-color:var(--accD);color:var(--acc);background:var(--accL)}
+
+/* Right card */
+.conn-right-col{flex:0 0 300px;display:flex;flex-direction:column;align-self:stretch}
+.conn-card{width:100%}
+.conn-card .dcr{display:none}
+.conn-card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.conn-card-grid .soc-btn{min-height:64px}
+
+/* Mobile: stack all 3 */
+@media(max-width:900px){
+  .conn-wrap2{flex-direction:column;gap:36px}
+  .conn-card{flex:none !important;width:100%}
+  .conn-polaroid-bottom{justify-content:center;margin-top:36px}
+  .polaroid-frame{width:185px}
+}
+</style>
+
+<!-- Crop override: a3 gallery head alignment -->
+<style>
+#gi-a3-img{
+  object-position:center 100%;
+  transform:scale(1.48);
+  transform-origin:center 70%;
+  transition:transform .75s cubic-bezier(.25,.46,.45,.94),filter .5s;
+}
+.gi:hover #gi-a3-img{
+  transform:scale(1.56);
+  filter:contrast(1.08) saturate(.85) brightness(1.05) grayscale(0);
+}
+</style>
+
+<!-- Bio: 2 colunas desktop · stack vertical mobile -->
+<style>
+/* Bio desktop: 2 colunas (heading+texto esq | foto dir) */
+.bio-sw{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:80px;
+  align-items:start;
+}
+.bio-left{
+  display:flex;
+  flex-direction:column;
+}
+.bio-head{margin-bottom:36px}
+
+/* Foto preenche exatamente a altura de bio-left via absolute fill */
+.bio-photo{
+  align-self:stretch;
+  position:relative;
+}
+.bio-photo .photo-frame{
+  position:absolute;
+  inset:0;
+}
+.bio-photo .photo-frame::before,
+.bio-photo .photo-frame::after{display:none}
+.bio-photo .photo-frame img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 28%;
+}
+.bio-text .bio-p{color:rgba(244,244,248,.7);font-size:15px;line-height:1.92;margin-bottom:20px}
+
+/* Mobile bio: heading → foto → texto */
+@media(max-width:900px){
+  .bio-sw{
+    display:grid;
+    grid-template-columns:1fr;
+    grid-template-areas:"head" "photo" "text";
+  }
+  .bio-left{display:contents}
+  .bio-head{grid-area:head;margin-bottom:36px}
+  .bio-photo{
+    grid-area:photo;
+    width:100%;
+    position:static;
+    align-self:auto;
+  }
+  .bio-photo .photo-frame{
+    position:static;
+  }
+  .bio-photo .photo-frame img{
+    position:static;
+    inset:auto;
+    width:100%;
+    height:480px;
+    object-position:center 44% !important;
+  }
+  .bio-text{grid-area:text;text-align:left;margin-top:36px}
+  .bio-text .bio-p{font-size:15px}
+}
+
+@media(max-width:600px){
+  .bio-photo .photo-frame img{height:440px}
+  .bio-text{text-align:left}
+  .bio-sw{padding-top:64px;padding-bottom:64px}
+}
+
+/* ── Polish geral mobile ── */
+@media(max-width:900px){
+  /* Seção vídeos: padding menor */
+  #videos .sw{padding-top:72px;padding-bottom:72px}
+
+  /* Siga a Jornada: stats overflow fix */
+  .cs-row{flex-wrap:wrap}
+  .cs-n{font-size:36px !important;min-width:auto}
+
+  /* Connect polaroid centralizado */
+  .conn-right-col{align-self:auto;flex:none;width:100%}
+
+  /* Booking form: 2 col no tablet */
+  .bk-grid4{grid-template-columns:1fr 1fr !important}
+
+  /* Sections: headings mais compactos */
+  .conn-h{font-size:clamp(36px,10vw,56px) !important}
+
+  /* Gallery última foto ocupa linha inteira */
+  .a5{grid-column:1/-1 !important;height:260px !important}
+
+  /* Hero scroll indicator: esconder no mobile */
+  .hero-scroll{display:none}
+}
+
+@media(max-width:600px){
+  /* Stats bar — se existir, menores */
+  .st-n{font-size:34px !important}
+
+  /* Videos: padding flush */
+  #videos .sw{padding-left:0;padding-right:0}
+  #videos .sw>.rv{padding-left:24px}
+
+  /* Siga a Jornada stats phone */
+  .cs-n{font-size:30px !important}
+  .cs-l{font-size:7px !important;letter-spacing:2px}
+
+  /* Booking single col */
+  .bk-grid4{grid-template-columns:1fr !important}
+  .bform-direct-row{grid-template-columns:1fr !important}
+
+  /* Footer logo maior */
+  footer img[alt="LOWZZADA"]{height:48px !important}
+}
+</style>
+
+<!-- Mobile fixes -->
+<style>
+@media(max-width:900px){
+
+  /* Bio heading — grande e centralizado no mobile */
+  .bio-h{font-size:clamp(46px,13vw,70px) !important;line-height:.96;text-align:center}
+  .bio-h span{padding-left:0 !important}
+  .bio-head{text-align:center}
+  .bio-photo .photo-frame img{height:500px;object-position:center 50% !important}
+
+  /* Stats bar 8+ RJ etc — menor */
+  .st-n{font-size:38px !important}
+  .st-l{font-size:7px;letter-spacing:3px}
+  .st{padding:22px 10px}
+
+  /* Gallery — última foto (a5) ocupa linha inteira */
+  .a5{grid-column:1/-1 !important;height:240px !important}
+
+  /* Siga a Jornada — heading menor */
+  .conn-h{font-size:clamp(32px,9vw,52px) !important;line-height:.95}
+
+  /* Stats do Connect — muito menores no mobile */
+  .cs-n{font-size:32px !important;min-width:52px}
+  .cs-l{font-size:7px !important;letter-spacing:3px}
+  .cs-row{padding:12px 0;gap:14px}
+
+  /* Connect: parágrafos com max-width */
+  .conn-p{font-size:13.5px;line-height:1.75}
+
+  /* Polaroid mobile — tamanho razoável */
+  .polaroid-frame{width:100% !important;max-width:300px}
+  .conn-polaroid-bottom{justify-content:center}
+
+  /* Booking — grid 2col no tablet */
+  .bk-grid4{grid-template-columns:1fr 1fr !important}
+
+  /* Contato direto — empilha no mobile */
+  .bform-direct-row{grid-template-columns:1fr !important}
+
+  /* Section headings gerais */
+  .sec-h{font-size:clamp(28px,8vw,48px)}
+  .bk-h{font-size:clamp(32px,9vw,56px) !important}
+
+}
+
+@media(max-width:600px){
+
+  /* Bio heading — grande no phone */
+  .bio-h{font-size:clamp(54px,17.5vw,76px) !important;text-align:center}
+  .bio-photo .photo-frame img{height:450px;object-position:center 48% !important}
+
+  /* Stats bar ainda menores */
+  .st-n{font-size:32px !important}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .st:nth-child(5){grid-column:1/-1}
+
+  /* Siga a Jornada stats */
+  .cs-n{font-size:28px !important}
+
+  /* Booking grid — single col no phone */
+  .bk-grid4{grid-template-columns:1fr !important}
+
+  /* Gallery última foto */
+  .a5{height:200px !important}
+
+}
+</style>
+
+<!-- Final polish -->
+<style>
+/* Scrollbar refinada */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-thumb{background:rgba(198,198,210,.24);border-radius:2px}
+::-webkit-scrollbar-thumb:hover{background:rgba(198,198,210,.42)}
+
+/* Inputs — leitura melhor */
+.fg input,.fg select,.fg textarea{color:rgba(244,244,248,.88);letter-spacing:.4px}
+.fg label{color:rgba(244,244,248,.55);letter-spacing:4px}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(244,244,248,.24)}
+
+/* Body text — mais legível */
+.bio-p,.conn-p,.bk-p{color:rgba(244,244,248,.7);font-weight:300;letter-spacing:.2px}
+
+/* Chips */
+.chip{color:rgba(244,244,248,.5)}
+
+/* Stats labels */
+.st-l{color:rgba(244,244,248,.48);letter-spacing:5px}
+
+/* Nav links */
+.nav-links a{color:rgba(244,244,248,.55)}
+
+/* Footer e connect info */
+.fc ul li a,.fc p,.cv{color:rgba(244,244,248,.45)}
+
+/* Logo hero — mais nítida */
+#heroLogoImg{
+  image-rendering:high-quality;
+  filter:invert(1) drop-shadow(0 2px 40px rgba(0,0,0,.6)) drop-shadow(0 0 70px rgba(200,200,216,.14));
+}
+
+/* Section labels */
+.lbl{opacity:.82}
+
+/* Botões — mais presença */
+.btn-fill{letter-spacing:5px;font-weight:700}
+</style>
+
+<!-- Booking full-width grid -->
+<style>
+.bk-grid4{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:0}
+.bform-direct{margin-top:28px}
+.bform-direct .bform-sep{margin-bottom:16px}
+.bform-direct-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bform-direct-row .bform-clink{
+  margin:0;width:100%;
+  padding:28px 20px;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:10px;
+  min-height:90px;
+}
+.bform-direct-row .bfc-lbl{font-size:8px;letter-spacing:4px}
+.bform-direct-row .bfc-val{font-size:13px}
+.bform-direct-row .bfc-arr{display:none}
+@media(max-width:600px){
+  .bform-direct-row{grid-template-columns:1fr}
+}
+.bform-direct .bform-clink{display:inline-flex;width:auto;margin-right:10px;margin-bottom:0;flex:none}
+@media(max-width:900px){
+  .bk-grid4{grid-template-columns:1fr 1fr}
+  .bform-direct .bform-clink{display:flex;width:100%;margin-right:0;margin-bottom:8px}
+}
+@media(max-width:600px){
+  .bk-grid4{grid-template-columns:1fr}
+}
+</style>
+
+<!-- Bio heading: tamanho expandido + animação de digitalização -->
+<style>
+/* Heading maior — preenche a coluna até a largura de Tech */
+.bio-h{
+  font-size:clamp(52px,7.4vw,118px) !important;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+  position:relative;
+  overflow:visible;
+}
+
+/* Oculto apenas quando JS adiciona bio-ready */
+.bio-h.bio-ready span{
+  clip-path:inset(0 100% 0 0);
+  will-change:clip-path;
+}
+
+/* Linha do scanner */
+.bio-scan-bar{
+  position:absolute;left:-4px;right:-4px;
+  height:2px;top:0;
+  background:linear-gradient(to right,
+    transparent 0%,
+    rgba(198,198,210,.6) 20%,
+    rgba(255,255,255,.9) 50%,
+    rgba(198,198,210,.6) 80%,
+    transparent 100%);
+  opacity:0;pointer-events:none;
+  filter:blur(.4px);
+}
+
+/* Ativação via classe .bio-scanning */
+.bio-h.bio-scanning .bio-scan-bar{
+  animation:scanBar 2.2s cubic-bezier(.4,0,.2,1) .05s forwards;
+}
+@keyframes scanBar{
+  0%{top:0%;opacity:0}
+  4%{opacity:1}
+  92%{opacity:.7}
+  100%{top:100%;opacity:0}
+}
+
+/* Reveal de cada linha em sequência */
+.bio-h.bio-scanning span:nth-child(1){
+  animation:lineReveal .55s cubic-bezier(.22,1,.36,1) .05s forwards;
+}
+.bio-h.bio-scanning span:nth-child(2){
+  animation:lineReveal .6s  cubic-bezier(.22,1,.36,1) .52s forwards;
+}
+.bio-h.bio-scanning span:nth-child(3){
+  animation:lineReveal .38s cubic-bezier(.22,1,.36,1) 1.05s forwards;
+}
+.bio-h.bio-scanning span:nth-child(4){
+  animation:lineReveal .72s cubic-bezier(.22,1,.36,1) 1.38s forwards;
+}
+@keyframes lineReveal{
+  0%  {clip-path:inset(0 100% 0 0);opacity:.7}
+  60% {opacity:1}
+  100%{clip-path:inset(0 0% 0 0);opacity:1}
+}
+
+/* Glitch sutil no final */
+.bio-h.bio-scanning span:nth-child(4){
+  animation:lineReveal .72s cubic-bezier(.22,1,.36,1) 1.38s forwards,
+            bioGlitch .12s steps(1) 2.14s 2 forwards;
+}
+@keyframes bioGlitch{
+  0%  {transform:translateX(0);filter:none}
+  33% {transform:translateX(-3px);filter:brightness(1.3) saturate(1.2)}
+  66% {transform:translateX(2px);filter:brightness(.9)}
+  100%{transform:translateX(0);filter:none}
+}
+
+/* Mobile heading bio */
+@media(max-width:900px){
+  .bio-h{font-size:clamp(34px,9vw,48px) !important;text-align:center;line-height:.96}
+  .bio-h span{padding-left:0 !important}
+  .bio-head{text-align:center}
+}
+@media(max-width:600px){
+  .bio-h{font-size:clamp(36px,10.5vw,52px) !important;line-height:.95}
+}
+
+/* ── Refinamento geral — polish premium ── */
+
+/* Respiro entre seções — mais consistente */
+@media(max-width:900px){
+  .sw{padding:72px 24px}
+  #gallery .sw{padding-bottom:0}
+}
+@media(max-width:600px){
+  .sw{padding:60px 18px}
+}
+
+/* Bio texto mobile — legibilidade */
+@media(max-width:900px){
+  .bio-text .bio-p{font-size:15px !important;line-height:1.82 !important;margin-bottom:16px !important;text-align:left}
+}
+@media(max-width:600px){
+  .bio-text .bio-p{font-size:14.5px !important;line-height:1.8 !important;text-align:left}
+  .bio-text{text-align:left !important}
+}
+
+/* Connect mobile — 3 stats redistribuídos */
+@media(max-width:900px){
+  .conn-h{font-size:clamp(36px,10vw,58px) !important;line-height:.93}
+  .conn-p{font-size:14px;line-height:1.78;max-width:100%}
+  .conn-stats{margin-top:28px}
+  .cs-row{border-bottom:1px solid var(--bdr);padding:22px 0;margin-bottom:0}
+  .cs-row.cs-last{border-bottom:none}
+  .cs-n{font-size:44px !important;letter-spacing:1px}
+  .cs-l{font-size:8px !important;letter-spacing:4px}
+}
+@media(max-width:600px){
+  .cs-row{padding:20px 0}
+  .cs-n{font-size:40px !important}
+  .cs-l{font-size:7.5px !important}
+}
+
+/* Gallery mobile — melhor proporção */
+@media(max-width:900px){
+  .a1,.a2,.a3{height:230px}
+  .a4{height:220px}
+  .a5{height:260px !important}
+  .a6{height:210px}
+}
+@media(max-width:600px){
+  .a1,.a2,.a3{height:190px}
+  .a4{height:175px}
+  .a5{height:210px !important}
+  .a6{height:180px}
+}
+
+/* Videos mobile — cards mais altos */
+@media(max-width:600px){
+  .vid-grid4{gap:5px}
+  .vc{aspect-ratio:16/10}
+}
+
+/* Booking mobile — form mais respirado */
+@media(max-width:900px){
+  .bk-h{font-size:clamp(34px,9.5vw,58px) !important;line-height:.93}
+  .bk-p{font-size:14px;line-height:1.82}
+  .bform-direct{margin-top:24px}
+}
+
+/* Footer mobile — mais compacto */
+@media(max-width:600px){
+  .fb{padding:16px 18px}
+  .fc2{font-size:8.5px}
+}
+</style>
+
+<script>
+/* Bio scan animation */
+(function(){
+  var h = document.querySelector('.bio-h');
+  if(!h) return;
+  var reduced = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  /* Injeta barra de scan */
+  var bar = document.createElement('div');
+  bar.className = 'bio-scan-bar';
+  h.appendChild(bar);
+
+  /* Aplica estado inicial — JS controla clip-path */
+  if(!reduced) h.classList.add('bio-ready');
+
+  var done = false;
+  function fire(){
+    if(done) return;
+    done = true;
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        h.classList.add('bio-scanning');
+      });
+    });
+  }
+
+  /* Dispara quando entra na viewport (threshold baixo para não perder) */
+  var io = new IntersectionObserver(function(entries){
+    if(entries[0].isIntersecting){ fire(); io.disconnect(); }
+  },{threshold:.05, rootMargin:'0px 0px -20px 0px'});
+  io.observe(h);
+
+  /* Fallback: 400ms garante que o texto aparece mesmo sem scroll */
+  setTimeout(fire, 400);
 })();
 </script>
 </body>
