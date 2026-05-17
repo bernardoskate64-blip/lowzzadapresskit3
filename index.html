@@ -1948,8 +1948,8 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   overflow:visible;
 }
 
-/* Oculto apenas quando JS adiciona bio-ready */
-.bio-h.bio-ready span{
+/* Oculto apenas quando JS adiciona bio-ready — exclui spans mobile */
+.bio-h.bio-ready span:not(.b-m){
   clip-path:inset(0 100% 0 0);
   will-change:clip-path;
 }
@@ -2011,16 +2011,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 }
 
 /* Mobile heading bio — 2 linhas que preenchem a tela */
-.b-m{display:none}
+/* .b-m visível por padrão; escondido apenas no desktop */
+@media(min-width:901px){.b-m{display:none !important}}
 @media(max-width:900px){
   .bio-h{text-align:left;line-height:.91}
   .bio-head{text-align:left}
   #bio .lbl{display:inline-flex;justify-content:flex-start;width:auto}
+  /* Esconde spans desktop */
   .b-d{display:none !important}
-  /* "O SOM POR TRÁS" — nth-child(5) */
-  .bio-h > span:nth-child(5){display:block !important;padding-left:0 !important;font-size:clamp(38px,11.5vw,52px) !important}
-  /* "DO MOVIMENTO" — nth-child(6), maior = âncora visual */
-  .bio-h > span:nth-child(6){display:block !important;padding-left:0 !important;font-size:clamp(44px,13.2vw,60px) !important;margin-top:.06em}
+  /* Mostra spans mobile */
+  .b-m{display:block;padding-left:0}
+  /* "O SOM POR TRÁS" */
+  .bio-h > span:nth-child(5){font-size:clamp(38px,11.5vw,52px) !important}
+  /* "DO MOVIMENTO" — maior = âncora visual */
+  .bio-h > span:nth-child(6){font-size:clamp(44px,13.2vw,60px) !important;margin-top:.06em}
 }
 
 /* ── Refinamento geral — polish premium ── */
