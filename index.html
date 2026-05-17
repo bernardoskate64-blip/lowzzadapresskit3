@@ -153,7 +153,7 @@ body{background:var(--bg);color:var(--fg);font-family:'Jost',sans-serif;font-wei
   object-fit:cover;object-position:center center;z-index:0;
 }
 .hero-veil {
-  position:absolute;inset:0;z-index:1;
+  position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
     linear-gradient(to right,rgba(6,6,8,.42) 0%,rgba(6,6,8,.0) 50%,rgba(6,6,8,.22) 100%),
     linear-gradient(to bottom,
@@ -1244,9 +1244,26 @@ body{animation:pageIn .55s ease both}
 
 <!-- ═══ SCRIPTS ═══ -->
 <script>
-/* ── Hero background mute toggle ── */
+/* ── Hero video: autoplay + fallback no primeiro toque ── */
 const heroVideo = document.querySelector('#hero video');
-const muteBtn   = document.getElementById('muteToggle');
+if (heroVideo) {
+  var heroPlayPromise = heroVideo.play();
+  if (heroPlayPromise !== undefined) {
+    heroPlayPromise.catch(function() {
+      // Autoplay bloqueado — tenta no primeiro gesto do usuário
+      var resumeOnGesture = function() {
+        heroVideo.play().catch(function(){});
+        document.removeEventListener('touchstart', resumeOnGesture);
+        document.removeEventListener('click', resumeOnGesture);
+      };
+      document.addEventListener('touchstart', resumeOnGesture, { once: true });
+      document.addEventListener('click', resumeOnGesture, { once: true });
+    });
+  }
+}
+
+/* ── Hero background mute toggle ── */
+const muteBtn = document.getElementById('muteToggle');
 if (heroVideo && muteBtn) {
   muteBtn.addEventListener('click', () => {
     const willUnmute = heroVideo.muted;
