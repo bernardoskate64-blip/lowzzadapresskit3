@@ -2006,24 +2006,19 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   100%{transform:translateX(0);filter:none}
 }
 
-/* Mobile heading bio — pirâmide invertida */
+/* Mobile heading bio — pirâmide 3 linhas */
 @media(max-width:900px){
-  .bio-h{font-size:clamp(62px,18vw,82px) !important;text-align:left;line-height:.92}
+  .bio-h{font-size:clamp(62px,17vw,80px) !important;text-align:left;line-height:.9}
   .bio-head{text-align:left}
   #bio .lbl{display:inline-flex;justify-content:flex-start;width:auto}
-  .bio-h > span:nth-child(1){padding-left:13% !important}
-  .bio-h > span:nth-child(2){padding-left:3% !important}
-  .bio-h > span:nth-child(3){padding-left:42% !important;font-size:.58em;opacity:.7}
-  .bio-h > span:nth-child(4){padding-left:0 !important}
-}
-@media(max-width:600px){
-  .bio-h{font-size:clamp(60px,18vw,80px) !important;text-align:left;line-height:.92}
-  .bio-head{text-align:left}
-  #bio .lbl{display:inline-flex;justify-content:flex-start;width:auto}
-  .bio-h > span:nth-child(1){padding-left:12% !important}
-  .bio-h > span:nth-child(2){padding-left:2% !important}
-  .bio-h > span:nth-child(3){padding-left:40% !important;font-size:.58em;opacity:.7}
-  .bio-h > span:nth-child(4){padding-left:0 !important}
+  /* O SOM — topo estreito (~37% da largura) */
+  .bio-h > span:nth-child(1){padding-left:0 !important;font-size:.7em}
+  /* POR TRÁS — expande (~85% da largura) */
+  .bio-h > span:nth-child(2){padding-left:0 !important}
+  /* "do" — escondido no mobile */
+  .bio-h > span:nth-child(3){display:none !important}
+  /* MOVIMENTO — ancora base, preenche 100% */
+  .bio-h > span:nth-child(4){padding-left:0 !important;font-size:1.06em}
 }
 
 /* ── Refinamento geral — polish premium ── */
