@@ -1,0 +1,26 @@
+# Cache headers — Cloudflare Pages
+# index.html: sem cache (garante que updates chegam imediato)
+/index.html
+  Cache-Control: no-cache, must-revalidate
+  X-Content-Type-Options: nosniff
+
+# Imagens — cache de 1 ano
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=604800, immutable
+
+# Vídeos — cache de 30 dias
+/*.mp4
+  Cache-Control: public, max-age=2592000
+
+# Tudo mais — 1 hora
+/*
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
