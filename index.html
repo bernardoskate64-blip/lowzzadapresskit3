@@ -2016,14 +2016,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   .bio-h{text-align:left;line-height:.91}
   .bio-head{text-align:left}
   #bio .lbl{display:inline-flex;justify-content:flex-start;width:auto}
-  /* Esconde versão desktop */
   .b-d{display:none !important}
-  /* Mostra versão mobile */
-  .b-m{display:block !important;padding-left:0 !important}
-  /* "O SOM POR TRÁS" — 14 chars, preenche ~100% a 11.5vw */
-  .bio-h > span.b-m:first-of-type{font-size:clamp(38px,11.5vw,52px) !important}
-  /* "DO MOVIMENTO" — 12 chars, preenche ~100% a 13.2vw, maior = âncora */
-  .bio-h > span.b-m:last-of-type{font-size:clamp(44px,13.2vw,60px) !important;margin-top:.08em}
+  /* "O SOM POR TRÁS" — nth-child(5) */
+  .bio-h > span:nth-child(5){display:block !important;padding-left:0 !important;font-size:clamp(38px,11.5vw,52px) !important}
+  /* "DO MOVIMENTO" — nth-child(6), maior = âncora visual */
+  .bio-h > span:nth-child(6){display:block !important;padding-left:0 !important;font-size:clamp(44px,13.2vw,60px) !important;margin-top:.06em}
 }
 
 /* ── Refinamento geral — polish premium ── */
