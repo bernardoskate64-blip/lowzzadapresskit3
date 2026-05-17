@@ -1837,8 +1837,10 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 @media(max-width:600px){
 
-  /* Bio heading — grande no phone */
-  .bio-h{font-size:clamp(54px,17.5vw,76px) !important;text-align:center}
+  /* Bio heading — escalonada à esquerda no phone */
+  .bio-h{font-size:clamp(54px,17.5vw,76px) !important;text-align:left}
+  .bio-head{text-align:left}
+  #bio .lbl{display:inline-flex;justify-content:flex-start;width:auto}
   .bio-photo .photo-frame img{height:450px;object-position:center 48% !important}
 
   /* Stats bar ainda menores */
@@ -2006,12 +2008,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 
 /* Mobile heading bio */
 @media(max-width:900px){
-  .bio-h{font-size:clamp(34px,9vw,48px) !important;text-align:center;line-height:.96}
-  .bio-h span{padding-left:0 !important}
-  .bio-head{text-align:center}
+  .bio-h{font-size:clamp(55px,16vw,72px) !important;text-align:left;line-height:.93}
+  .bio-head{text-align:left}
 }
 @media(max-width:600px){
-  .bio-h{font-size:clamp(36px,10.5vw,52px) !important;line-height:.95}
+  .bio-h{font-size:clamp(54px,17.5vw,76px) !important;text-align:left;line-height:.93}
+  .bio-head{text-align:left}
+  #bio .lbl{display:inline-flex;justify-content:flex-start;width:auto}
 }
 
 /* ── Refinamento geral — polish premium ── */
