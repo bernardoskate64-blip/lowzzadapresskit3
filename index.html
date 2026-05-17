@@ -1022,10 +1022,14 @@ body{animation:pageIn .55s ease both}
     <div class="bio-head rv">
       <div class="lbl">Biografia</div>
       <h2 class="bio-h" style="line-height:.96">
-        <span style="display:block;padding-left:0">O Som</span>
-        <span style="display:block;padding-left:1.1em"><em>Por Trás</em></span>
-        <span style="display:block;padding-left:2.4em">do</span>
-        <span style="display:block;padding-left:.6em">Movimento</span>
+        <!-- Desktop: 4 linhas escalonadas -->
+        <span class="b-d" style="display:block;padding-left:0">O Som</span>
+        <span class="b-d" style="display:block;padding-left:1.1em"><em>Por Trás</em></span>
+        <span class="b-d" style="display:block;padding-left:2.4em">do</span>
+        <span class="b-d" style="display:block;padding-left:.6em">Movimento</span>
+        <!-- Mobile: 2 linhas que preenchem a tela -->
+        <span class="b-m">O Som Por Trás</span>
+        <span class="b-m">do Movimento</span>
       </h2>
     </div>
     <div class="bio-text rv d2">
@@ -2006,19 +2010,20 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   100%{transform:translateX(0);filter:none}
 }
 
-/* Mobile heading bio — pirâmide 3 linhas, "do" acento inline */
+/* Mobile heading bio — 2 linhas que preenchem a tela */
+.b-m{display:none}
 @media(max-width:900px){
-  .bio-h{font-size:clamp(58px,16vw,76px) !important;text-align:left;line-height:.9}
+  .bio-h{text-align:left;line-height:.91}
   .bio-head{text-align:left}
   #bio .lbl{display:inline-flex;justify-content:flex-start;width:auto}
-  /* O SOM — bloco estreito no topo (50% da largura) */
-  .bio-h > span:nth-child(1){display:block !important;padding-left:0 !important}
-  /* POR TRÁS — bloco médio (80% da largura) */
-  .bio-h > span:nth-child(2){display:block !important;padding-left:0 !important}
-  /* "do" — inline, minúsculo, acento antes de MOVIMENTO */
-  .bio-h > span:nth-child(3){display:inline !important;padding-left:0 !important;font-size:.38em;opacity:.7;letter-spacing:2px}
-  /* MOVIMENTO — inline na mesma linha do "do", preenche o restante */
-  .bio-h > span:nth-child(4){display:inline !important;padding-left:.12em !important;font-size:.97em}
+  /* Esconde versão desktop */
+  .b-d{display:none !important}
+  /* Mostra versão mobile */
+  .b-m{display:block !important;padding-left:0 !important}
+  /* "O SOM POR TRÁS" — 14 chars, preenche ~100% a 11.5vw */
+  .bio-h > span.b-m:first-of-type{font-size:clamp(38px,11.5vw,52px) !important}
+  /* "DO MOVIMENTO" — 12 chars, preenche ~100% a 13.2vw, maior = âncora */
+  .bio-h > span.b-m:last-of-type{font-size:clamp(44px,13.2vw,60px) !important;margin-top:.08em}
 }
 
 /* ── Refinamento geral — polish premium ── */
