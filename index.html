@@ -984,7 +984,7 @@ body{animation:pageIn .55s ease both}
     </div>
 
     <div class="hero-cta">
-      <a href="#booking" class="btn-fill">Booking</a>
+      <a href="#booking" class="btn-line">Booking</a>
       <a href="https://soundcloud.com/diogo-diogo-693807927" target="_blank" rel="noopener noreferrer" class="btn-line">Ouvir Mixes</a>
     </div>
   </div>
@@ -1477,7 +1477,6 @@ function openM(id) {
   mvid.src = fullSrc;
   mvid.muted = false;
   mvid.volume = 1;
-  mvid.load();
   var p = mvid.play();
   if (p !== undefined) p.catch(function() {});
 }
@@ -1794,12 +1793,11 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 <style>
 @media(max-width:900px){
 
-  /* Bio heading — grande e centralizado no mobile */
-  .bio-h{font-size:clamp(46px,13vw,70px) !important;line-height:.96;text-align:center}
-  .bio-h span{padding-left:0 !important}
-  .bio-head{text-align:center}
-  #bio .lbl{display:flex;justify-content:center;width:100%;margin-bottom:28px}
-  #bio .lbl::after{display:none}
+  /* Bio heading — tipografia escalonada à esquerda no mobile */
+  .bio-h{font-size:clamp(55px,16vw,72px) !important;line-height:.93}
+  .bio-head{text-align:left}
+  #bio .lbl{display:inline-flex;justify-content:flex-start;width:auto;margin-bottom:20px}
+  #bio .lbl::after{display:inline-block}
   .bio-photo .photo-frame img{height:500px;object-position:center 50% !important}
 
   /* Stats bar 8+ RJ etc — menor */
