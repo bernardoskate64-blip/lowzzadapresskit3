@@ -965,7 +965,7 @@ body{animation:pageIn .55s ease both}
 
 <!-- ═══ HERO ═══ -->
 <section id="hero">
-  <video autoplay muted loop playsinline preload="auto"
+  <video autoplay muted loop playsinline preload="metadata"
          x-webkit-airplay="deny" disablePictureInPicture>
     <source src="videos/hero-bg_2.mp4" type="video/mp4">
   </video>
@@ -1247,6 +1247,20 @@ body{animation:pageIn .55s ease both}
 /* ── Hero background mute toggle ── */
 const heroVideo = document.querySelector('#hero video');
 const muteBtn   = document.getElementById('muteToggle');
+
+// Tenta desmutar assim que o vídeo começa — browsers modernos permitem após autoplay iniciar
+if (heroVideo) {
+  heroVideo.addEventListener('playing', function tryUnmute() {
+    heroVideo.muted = false;
+    if (muteBtn) {
+      muteBtn.classList.add('unmuted');
+      muteBtn.setAttribute('aria-pressed', 'true');
+      muteBtn.setAttribute('aria-label', 'Silenciar vídeo de fundo');
+    }
+    heroVideo.removeEventListener('playing', tryUnmute);
+  });
+}
+
 if (heroVideo && muteBtn) {
   muteBtn.addEventListener('click', () => {
     const willUnmute = heroVideo.muted;
@@ -1254,7 +1268,6 @@ if (heroVideo && muteBtn) {
     muteBtn.classList.toggle('unmuted', willUnmute);
     muteBtn.setAttribute('aria-pressed', String(willUnmute));
     muteBtn.setAttribute('aria-label', willUnmute ? 'Silenciar vídeo de fundo' : 'Ativar som do vídeo de fundo');
-    // Some browsers pause the video when toggling muted mid-playback — keep it going.
     const p = heroVideo.play();
     if (p && typeof p.catch === 'function') p.catch(() => {});
   });
