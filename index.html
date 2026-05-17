@@ -1247,20 +1247,6 @@ body{animation:pageIn .55s ease both}
 /* ── Hero background mute toggle ── */
 const heroVideo = document.querySelector('#hero video');
 const muteBtn   = document.getElementById('muteToggle');
-
-// Tenta desmutar assim que o vídeo começa — browsers modernos permitem após autoplay iniciar
-if (heroVideo) {
-  heroVideo.addEventListener('playing', function tryUnmute() {
-    heroVideo.muted = false;
-    if (muteBtn) {
-      muteBtn.classList.add('unmuted');
-      muteBtn.setAttribute('aria-pressed', 'true');
-      muteBtn.setAttribute('aria-label', 'Silenciar vídeo de fundo');
-    }
-    heroVideo.removeEventListener('playing', tryUnmute);
-  });
-}
-
 if (heroVideo && muteBtn) {
   muteBtn.addEventListener('click', () => {
     const willUnmute = heroVideo.muted;
