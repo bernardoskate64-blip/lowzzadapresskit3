@@ -1,0 +1,20 @@
+/index.html
+  Cache-Control: no-cache, must-revalidate
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=604800, immutable
+
+/*.mp4
+  Cache-Control: public, max-age=2592000
+
+/*
+  Cache-Control: public, max-age=3600
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
